@@ -21,3 +21,8 @@ class KnowingNode {
 
         
 };
+
+std::vector<int> encryptSegmentID(std::string segmentID, std::string address);
+std::vector<int> weakEncryptSegmentID(std::vector<int> segmentID, std::string address);
+std::vector<int> weakDecryptSegmentID(std::vector<int>, std::string original_address);
+std::vector<int> decryptSegmentID(std::vector<int>, std::string original_address);

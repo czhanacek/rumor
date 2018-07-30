@@ -43,6 +43,62 @@ void KnowingNode::insertWaypoint(std::string to_addr, std::string from_addr) {
     }
 
 }
+std::vector<int> encryptSegmentID(std::string segmentID, std::string address) {
+    int largest = std::max(segmentID.size(), address.size());
+    std::vector<int> cypherNumbers;
+    for(int i = 0; i < largest; i++) {
+        int segiter = i;
+        int additer = i;
+        if(segiter >= segmentID.size()) {
+            segiter = segiter % segmentID.size();
+        }
+        if(additer >= address.size()) {
+            additer = additer % address.size();
+        }
+        cypherNumbers.push_back(segmentID[segiter] * address[additer]);
+    }
+    
+    return cypherNumbers;
+}
+
+std::vector<int> weakEncryptSegmentID(std::vector<int> segmentID, std::string address) {
+    int largest = std::max(segmentID.size(), address.size());
+    std::vector<int> cypherNumbers;
+    for(int i = 0; i < largest; i++) {
+        int segiter = i;
+        int additer = i;
+        if(segiter >= segmentID.size()) {
+            segiter = segiter % segmentID.size();
+        }
+        if(additer >= address.size()) {
+            additer = additer % address.size();
+        }
+        cypherNumbers.push_back(segmentID[segiter] + address[additer]);
+    }
+    
+    return cypherNumbers;
+}
+
+std::vector<int> weakDecryptSegmentID(std::vector<int> encryptedString, std::string address) {
+    for(int i = 0; i < encryptedString.size(); i++) {
+        encryptedString[i] -= address[i % address.size()];
+    }
+    std::cout << std::endl;
+    return encryptedString;
+
+}
+
+std::vector<int> decryptSegmentID(std::vector<int> encryptedString, std::string address) {
+    for(int i = 0; i < encryptedString.size(); i++) {
+        encryptedString[i] /= address[i % address.size()];
+    }
+    for(int i = 0; i < encryptedString.size(); i++) {
+        std::cout << (char)encryptedString[i];
+    } 
+    std::cout << std::endl;
+    return encryptedString;
+
+}
 
 void KnowingNode::printChest(void) {
     std::cout << "My address is " << this->getAddr() << std::endl;
