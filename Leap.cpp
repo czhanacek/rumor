@@ -169,7 +169,7 @@ bool LeapChest::get(std::unique_ptr<Leap> leap) {
         return false;
     }
     else {
-        this->root->search(std::move(leap));
+        return this->root->search(std::move(leap));
     }
 }
 
